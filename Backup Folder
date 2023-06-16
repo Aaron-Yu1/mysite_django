@@ -1,4 +1,0 @@
-$date = Get-Date -Format "yyyyMMdd"         # Get computer date
-$destination = New-Item -Path "C:\Backup Folder\$date" -ItemType Directory  # Create a backup folder and use computer date as the folder name
-$source = "C:\source folder\*"            # Need to backup file
-Copy-Item -Path $source -Destination $destination           

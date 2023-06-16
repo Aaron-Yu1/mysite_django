@@ -1,5 +1,0 @@
-$date = (Get-Date).AddDays(-7).ToString("yyyyMMdd")   # Get a date, let you can know name of folder need to delete
-$path = "C:\Backup Folder\$date"            # The path of the folder you need to delete
-$testPath = Test-Path $path                 # Test the folder whether exists
-if ($testPath -eq $true ) {                 # If the folder is exists, remove the folder
-    Remove-Item $path -Recurse }
