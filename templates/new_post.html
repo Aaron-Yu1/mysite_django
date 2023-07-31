@@ -1,0 +1,10 @@
+<h1>New Post</h1>
+<form method="POST">
+    {% csrf_token %}
+    {% if message %}
+        <h1>{{ message }}</h1>
+    {% endif %}
+    <input type="txt" name="title" placeholder="Post Title" > <br />
+    <textarea placeholder="Post Description" name="description" cols="20" rows="5"></textarea>
+    <input type="submit" value="Submit" />
+</form>

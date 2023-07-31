@@ -18,3 +18,28 @@ def deletePost(request, pk):
     post = Post.objects.get(id = pk)
     post.delete()
     return redirect("home")
+
+def createPost(request):
+    context = {}
+    if request.method == "POST":
+        try:
+            Post.objects.create(
+                title = request.POST.get("title"),
+                body = request.POST.get("description"),
+                author = request.user
+            )
+            return redirect("home")
+        except:
+            context["message"] = "*Invalid details."
+    return render(request, "new_post.html", context)
+
+
+def updatePost(request, pk):
+    post = Post.objects.get(id = pk)
+    context = { "post": post }
+    if request.method == "POST":
+        post.title = request.POST.get("title")
+        post.body = request.POST.get("description")
+        post.save()
+        return redirect("home")
+    return render(request, "update_post.html", context)
