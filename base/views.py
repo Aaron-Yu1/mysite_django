@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .models import Post
 
 # Create your views here.
@@ -27,6 +28,8 @@ def loginUser(request):
             context = {"message": "User name or password is not incorrect."}
     return render(request, "login.html", context)
 
+
+@login_required(login_url="login")
 def logoutUser(request):
     logout(request)
     return redirect("home")
@@ -37,11 +40,13 @@ def getPost(request, pk):
     post = Post.objects.get(id = pk)
     return render(request, "post_detail.html", { "post": post })
 
+@login_required(login_url="login")
 def deletePost(request, pk):
     post = Post.objects.get(id = pk)
     post.delete()
     return redirect("home")
 
+@login_required(login_url="login")
 def createPost(request):
     context = {}
     if request.method == "POST":
@@ -56,7 +61,7 @@ def createPost(request):
             context["message"] = "*Invalid details."
     return render(request, "new_post.html", context)
 
-
+@login_required(login_url="login")
 def updatePost(request, pk):
     post = Post.objects.get(id = pk)
     context = { "post": post }
