@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .models import Post
+from .models import Post,Comment
 
 # Create your views here.
 
@@ -58,6 +58,13 @@ def myAccount(request):
 # post 
 def getPost(request, pk):
     post = Post.objects.get(id = pk)
+    if request.method == "POST":
+        comment = request.POST.get("comment")
+        Comment.objects.create(
+            post = post,
+            author = request.user,
+            comment =comment
+        )
     return render(request, "post_detail.html", { "post": post })
 
 @login_required(login_url="login")
