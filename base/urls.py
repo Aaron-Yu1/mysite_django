@@ -10,4 +10,5 @@ urlpatterns = [
     path("post/<str:pk>/edit", views.updatePost, name="update_post"),
     path("login/", views.loginUser, name="login"),
     path("logout/", views.logoutUser, name="logout"),
+    path("my_account/", views.myAccount, name="my_account"),
 ]

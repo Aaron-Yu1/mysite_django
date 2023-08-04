@@ -10,7 +10,7 @@
         {% if request.user.is_authenticated %}
             <li class="nav-item font-1x">Welcome <a href="/" class="text-underline user-btn">{{request.user.username}}</a></li>
             <div class="dropdown">
-                <div class="dropdown-item"><a href="/">My Account</a></div>
+                <div class="dropdown-item"><a href="{% url 'my_account' %}">My Account</a></div>
                 <div class="dropdown-item"><a href="{% url 'post_create' %}">Create</a></div>
                 <div class="dropdown-item"><a href="{% url 'logout' %}">Logout</a></div>
             </div>

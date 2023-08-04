@@ -34,6 +34,13 @@ def logoutUser(request):
     logout(request)
     return redirect("home")
 
+@login_required(login_url="login")
+def myAccount(request):
+    user = request.user
+    user_posts = Post.objects.filter(author=user)
+    context = {"posts": user_posts}
+    context["capitalize_username"] = request.user.username.capitalize()
+    return render(request, "my_account.htm", context)
 
 # post 
 def getPost(request, pk):
