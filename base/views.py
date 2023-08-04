@@ -1,13 +1,26 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from .models import Post
 
 # Create your views here.
 
+
+def search_posts(request):
+    post_search = ""
+    if request.GET.get("search"):
+        post_search = request.GET.get('search')
+        posts = Post.objects.filter(Q(title__icontains = post_search) | Q(body__icontains = post_search))
+    else:
+        posts = Post.objects.all()
+    return posts
+
 def index(request):
-    posts = Post.objects.all()
-    return render(request, "index.html", { "posts": posts})
+    posts = search_posts(request)
+    context = { "posts": posts }
+    return render(request, "index.html", context)
+
 
 def about(request):
     return render(request, "about.html")
