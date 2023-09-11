@@ -1,3 +1,8 @@
+"""
+This is define that need to register.
+Author: Aaron
+"""
+
 from django.contrib import admin
 from .models import Post,Comment
 

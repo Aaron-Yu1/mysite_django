@@ -1,3 +1,8 @@
+"""
+This is define the urls of site.
+Author: Aaron
+"""
+
 from django.urls import path
 from . import views
 
